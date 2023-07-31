@@ -3,9 +3,7 @@ package com.mycompany.invoise.controller;
 import com.mycompany.invoise.entity.Invoice;
 import com.mycompany.invoise.service.InvoiceServiceInterface;
 
-import java.util.Scanner;
-
-public class InvoiceControllerMichel implements InvoiceControllerInterface{
+public class InvoiceControllerWeb implements InvoiceControllerInterface{
     private InvoiceServiceInterface invoiceService;
 
     public InvoiceServiceInterface getInvoiceService() {
