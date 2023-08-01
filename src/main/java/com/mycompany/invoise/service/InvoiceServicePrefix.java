@@ -5,8 +5,8 @@ import com.mycompany.invoise.repository.InvoiceRepositoryInterface;
 import com.mycompany.invoise.repository.InvoiceRepositoryDatabase;
 
 public class InvoiceServicePrefix implements InvoiceServiceInterface{
-    private static long lastNumber=112L;
-
+    private  long lastNumber;
+    private String prefix;
     public InvoiceRepositoryInterface getInvoiceRepository() {
         return invoiceRepository;
     }
@@ -15,9 +15,26 @@ public class InvoiceServicePrefix implements InvoiceServiceInterface{
         this.invoiceRepository = invoiceRepository;
     }
 
-    private InvoiceRepositoryInterface invoiceRepository = new InvoiceRepositoryDatabase();
+    private InvoiceRepositoryInterface invoiceRepository ;
+    @Override
     public void createInvoice(Invoice invoice){
-        invoice.setNumber(String.valueOf("INV_"+(++lastNumber)));
+        invoice.setNumber(String.valueOf(prefix+(++lastNumber)));
         invoiceRepository.create(invoice);
+    }
+
+    public long getLastNumber() {
+        return lastNumber;
+    }
+
+    public void setLastNumber(long lastNumber) {
+        this.lastNumber = lastNumber;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
     }
 }

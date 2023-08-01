@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InvoiceRepositoryDatabase implements InvoiceRepositoryInterface {
-   private static  List<Invoice> invoices= new ArrayList<Invoice>();
-    public void create(Invoice invoice){
-        invoices.add(invoice);
+
+    @Override
+    public void create(Invoice invoice) {
         System.out.println("DATABASE Invoice add with number: "+invoice.getNumber()+ " for: "+invoice.getCustomerName());
     }
 }

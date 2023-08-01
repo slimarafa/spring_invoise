@@ -16,6 +16,7 @@ public class InvoiceServiceNumber implements  InvoiceServiceInterface{
     }
 
     private InvoiceRepositoryInterface invoiceRepository = new InvoiceRepositoryMemory();
+    @Override
     public void createInvoice(Invoice invoice){
         invoice.setNumber(String.valueOf(++lastNumber));
         invoiceRepository.create(invoice);

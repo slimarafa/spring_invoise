@@ -10,6 +10,8 @@ import com.mycompany.invoise.repository.InvoiceRepositoryDatabase;
 import com.mycompany.invoise.service.InvoiceServiceInterface;
 import com.mycompany.invoise.service.InvoiceServiceNumber;
 import com.mycompany.invoise.service.InvoiceServicePrefix;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Scanner;
 
@@ -21,50 +23,31 @@ public class App
 {
     public static void main( String[] args )
     {
-        
-        Scanner sc = new Scanner(System.in); //clavier
-        System.out.println("Quelle est le type de contrôleur ? (keyboard,web,douchette)");
-        String controllerType=sc.nextLine();
-
-        System.out.println("Quelle est le type de service ?(number,prefix)");
-        String serviceType=sc.nextLine();
-
-        System.out.println("Quelle est le type de repository ?(memory,database)");
-        String repositoryType=sc.nextLine();
-        InvoiceControllerInterface invoiceController=null;
-
-        switch(controllerType) {
-            case "keyboard":
-                invoiceController= new InvoiceControllerKeyboard();
-                break;
-            case "web":
-                invoiceController= new InvoiceControllerWeb();
-                break;
-            case "douchette":
-                invoiceController= new InvoiceControllerDouchette();
-                break;
-        }
-
-        InvoiceServiceInterface invoiceService=null;
-        switch(serviceType) {
-            case "number":
-                invoiceService= new InvoiceServiceNumber();
-                break;
-            case "prefix":
-                invoiceService= new InvoiceServicePrefix();
-                break;
-        }
-        InvoiceRepositoryInterface invoiceRepository=null;
-        switch(repositoryType) {
-            case "memory":
-                invoiceRepository= new InvoiceRepositoryMemory();
-                break;
-            case "database":
-                invoiceRepository= new InvoiceRepositoryDatabase();
-                break;
-        }
-       invoiceController.setInvoiceService(invoiceService);
-        invoiceService.setInvoiceRepository(invoiceRepository);
+        ApplicationContext context= new ClassPathXmlApplicationContext("applicationContext.xml");
+        InvoiceControllerInterface invoiceController=context.getBean(InvoiceControllerInterface.class);
         invoiceController.createInvoice();
+       /* Scanner sc = new Scanner(System.in); //clavier
+        System.out.println("Quelle est  classe de contrôleur ? ");
+        String controllerClass=sc.nextLine();
+
+        System.out.println("Quelle est la classe de service ?");
+        String serviceClass=sc.nextLine();
+
+        System.out.println("Quelle est la classe de repository ?");
+        String repositoryClass=sc.nextLine();
+
+        InvoiceControllerInterface invoiceController=null;
+        InvoiceServiceInterface invoiceService=null;
+        InvoiceRepositoryInterface invoiceRepository=null;
+        try {
+            invoiceController = (InvoiceControllerInterface) Class.forName(controllerClass).getDeclaredConstructor().newInstance();
+            invoiceService = (InvoiceServiceInterface) Class.forName(serviceClass).getDeclaredConstructor().newInstance();
+            invoiceRepository = (InvoiceRepositoryInterface) Class.forName(repositoryClass).getDeclaredConstructor().newInstance();
+            invoiceController.setInvoiceService(invoiceService);
+            invoiceService.setInvoiceRepository(invoiceRepository);
+            invoiceController.createInvoice();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }*/
     }
 }
