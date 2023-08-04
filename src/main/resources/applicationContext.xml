@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans.xsd" default-autowire="byType">
-<!-- configuration d'autowiring en fonction de nom de propriété ou de son type -->
-    <bean  class="com.mycompany.invoise.service.InvoiceServicePrefix" >
-
-        <property name="lastNumber" value="112"/>
-        <property name="prefix" value="INV_"/>
-    </bean>
-    <bean class="com.mycompany.invoise.controller.InvoiceControllerWeb" >
-
-    </bean>
-    <bean class="com.mycompany.invoise.repository.InvoiceRepositoryDatabase"/>
+               http://www.springframework.org/schema/beans/spring-beans.xsd
+                  http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd" >
+    <!-- configuration pour activer auto-wiring par annotation-->
+    <context:annotation-config/>
+    <context:property-placeholder location="classpath:application.properties"/>
+    <context:component-scan base-package="com.mycompany.invoise.controller.web"/>
+    <context:component-scan base-package="com.mycompany.invoise.service.prefix"/>
+    <context:component-scan base-package="com.mycompany.invoise.repository.memory"/>
 
 </beans>
