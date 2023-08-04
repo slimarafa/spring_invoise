@@ -2,7 +2,6 @@ package com.mycompany.invoise.service.prefix;
 
 import com.mycompany.invoise.entity.Invoice;
 import com.mycompany.invoise.repository.InvoiceRepositoryInterface;
-import com.mycompany.invoise.repository.InvoiceRepositoryDatabase;
 import com.mycompany.invoise.service.InvoiceServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
